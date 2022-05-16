@@ -1,0 +1,24 @@
+{
+    "name": "struzik-vladislav/epp-rabbitmq-connection",
+    "description": "Connection for communicating with EPP(Extensible Provisioning Protocol) servers via RabbitMQ server",
+    "keywords": ["epp", "rabbitmq", "connection"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladislav Struzik",
+            "email": "vladislav@struzik.blog"
+        }
+    ],
+    "require": {
+        "php": ">=7.4 <8.2",
+        "psr/log": "~1.0 | ~2.0 | ~3.0",
+        "struzik-vladislav/epp-client": "^2.3",
+        "php-amqplib/php-amqplib": "^3.0",
+        "symfony/uid": "~5.0 | ~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Struzik\\EPPClient\\RabbitMQConnection\\": "src/"
+        }
+    }
+}
