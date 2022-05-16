@@ -105,7 +105,7 @@ class RabbitMQConnection implements ConnectionInterface
             $this->response = null;
             $this->correlationId = (string) Uuid::v4();
 
-            $message = new AMQPMessage($xml, ['correlation_id' => $this->correlationId, 'reply_to' => $this->callbackQueue]);
+            $message = new AMQPMessage($xml, ['correlation_id' => $this->correlationId, 'reply_to' => $this->callbackQueue, 'expiration' => $this->timeout * 1000]);
             $this->channel->basic_publish($message, '', $this->queueName);
         } catch (\Exception $e) {
             $this->logger->error($e);
