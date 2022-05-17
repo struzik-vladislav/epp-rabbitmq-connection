@@ -77,6 +77,7 @@ class RabbitMQConnection implements ConnectionInterface
 
     public function read(): string
     {
+        $beginTime = microtime(true);
         try {
             while ($this->response === null) {
                 $this->channel->wait(null, false, $this->timeout);
@@ -85,8 +86,10 @@ class RabbitMQConnection implements ConnectionInterface
             $this->logger->error($e);
             throw new ConnectionException('An error occurred while trying to read the response. See previous exception.', 0, $e);
         }
+        $endTime = microtime(true);
+        $usedTime = round($endTime - $beginTime, 3);
 
-        $this->logger->info('The data read from the EPP connection', ['body' => $this->response]);
+        $this->logger->info('The data read from the EPP connection', ['body' => $this->response, 'time' => $usedTime]);
 
         $response = $this->response;
         $this->response = null;
